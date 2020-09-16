@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rec8</title>
+</head>
+<body>
+  <!--
+    if len(tags_a) > 1:
+    par = str(paragrah).toLowerCase()
+    paragrafosemespaco = re.sub('\s',"",par) #tira os espacos para verificar o "\n"
+  -->
+
+  <!--
+    if (par.find_in_text('</a><a')):  # verifica se tem um fechamento ligado na abertura de outra tag a
+    # dispara erro
+  -->
+  <h3>Verifica &lt;&frasl;a&gt;&lt;a</h3>
+  <p>
+    <a href="#">Link1</a><a href="#">Link2</a><a href="#">Link3</a>
+  </p>
+  
+  <!--
+    if (par.find_in_text('</a> <a')):  # verifica se tem espaço entre fechamento e abertura de outra tag a
+    # dispara erro
+  -->
+  <h3>Verifica &lt;&frasl;a&gt; &lt;a</h3>
+  <p>
+    <a href="#">Link1</a> <a href="#">Link2</a> <a href="#">Link3</a>
+  </p>
+
+  
+  <!--
+    if (par.find_in_text('</a><br><a') or par.find_in_text('</a><br /><a') or par.find_in_text('</a><br/><a')):
+    # verifica se tem a tag de quebra de linha entre fechamento e abertura de outra tag a
+    # dispara erro
+  -->
+  <h3>Verifica &lt;&frasl;a&gt;&lt;br&gt;&lt;a</h3>
+  <p>
+    <a href="#">Link1</a><br><a href="#">Link2</a><br><a href="#">Link3</a>
+  </p>
+  
+  <!--
+    if paragrafosemespaco.find_in_text("</a>\n<a"):  # verifica se tem quebra de linha entra o fechamento e abertura de outra tag a
+  -->
+  <h3>Verifica &lt;/a&gt;\n&lt;a</h3>
+  <p>
+    <a href="#">Link1</a>
+    <a href="#">Link2</a>
+    <a href="#">Link3</a>
+  </p>
+  
+  <!--
+    if paragrafosemespaco.find_in_text("</a><br>\n<a"):  # verifica se tem quebra de linha entra o fechamento e abertura de outra tag a
+  -->
+  <h3>Verifica &lt;&frasl;a&gt;&lt;br&gt;\n&lt;a</h3>
+  <p>
+    <a href="#">Link1</a><br>
+    <a href="#">Link2</a><br>
+    <a href="#">Link3</a>
+  </p>
+</body>
+</html>
