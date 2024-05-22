@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geo</title>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #222;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: bisque;
+      }
+
+      button {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background-color: aliceblue;
+        border: 3px solid #000;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      iframe {
+        width: 100vw;
+        height: 100vw;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      p.error {
+        font-weight: 700;
+        color: crimson;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="button">Mostre-me no mapa</button>
+    <div id="result"></div>
+    <script>
+      function clearResult() {
+        document.querySelector('#result').innerHTML = '';
+      }
+
+      function success(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${lon}`;
+
+        clearResult();
+
+        const paragraph = document.createElement('p');
+        paragraph.textContent = `Latitude: ${lat}, Longitude: ${lon}`;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = mapLink;
+        iframe.frameBorder = '0';
+
+        const anchor = document.createElement('a');
+        anchor.textContent = 'Abra o mapa no OpenStreetMap';
+        anchor.href = mapLink;
+        anchor.target = '_blank';
+
+        document.querySelector('#result').appendChild(paragraph);
+        document.querySelector('#result').appendChild(iframe);
+        document.querySelector('#result').appendChild(anchor);
+      }
+
+      function error(err) {
+        console.error(666, err);
+        clearResult();
+
+        const paragraph = document.createElement('p');
+        paragraph.classList.add('error');
+        paragraph.textContent = 'Não consegui localizar suas coordenadas.';
+        document.querySelector('#result').appendChild(paragraph);
+      }
+
+      const options = {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000,
+      };
+
+      document.querySelector('#button').addEventListener('click', () => {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+      });
+    </script>
+  </body>
+</html>
